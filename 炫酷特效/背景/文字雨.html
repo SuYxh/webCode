@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>文字雨</title>
+	<style type="text/css">
+		 #canvas {
+			background-color:black;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+	<script type="text/javascript">
+		 //通过id获取canvas标签
+		 var canvas = document.getElementById("canvas");
+		 //设置尺寸大小
+		 //屏幕
+		 var s = window.screen;
+		 //屏幕长度
+		 var w = canvas.width = s.width;
+		 //屏幕高度
+		 var h = canvas.height = s.height;
+		 //定义画板里的画笔
+		 var ctx = canvas.getContext("2d");
+		 //定义数组，256个子集，且都是一样的数字
+		 var array = Array(256).join("1").split(""); //join是把数组的子集们连接成字符串，split是把字符串分割成数组
+		 //因为页面类似动图，就是每一秒中，页面都会发生改变，所以我需要一个函数
+		 function gif() {
+		     //覆盖上一次的绘画
+		     ctx.fillStyle = "rgba(0,0,0,0.05)";
+		     ctx.fillRect(0, 0, w, h);
+		     //数据是什么？记录的字符串，接下来是给画板添加文本，设置文本所在
+		     //遍历array一遍，每个文字的位置随着数组下标而变化
+		     array.map(function(item, index) {
+		         ctx.fillStyle = colors();
+		         //item是数组下标所对应的数据，index是数组下标
+		         var text = String.fromCharCode(Math.ceil(Math.random() * 1000)); //根据URL转码随机的文字，添加在所处的位置
+		         ctx.fillText(text, index * 10, item); //ctx.fillText(text,x,y);text是指所添加的文字，x是x坐标，y是y坐标
+		         array[index] = (item > 700 + Math.random() * 400) ? 0 : item + 10; //修改每个子集的y坐标，且y坐标有范围
+		     })
+		 }
+		 //十六进制的颜色
+		 function colors() {
+		     var color = Math.ceil(Math.random() * 16777215).toString(16); //toString(16)将十进制转为十六进制
+		     //当color不足六位数时，前面补0；
+		     while (color.length < 6) {
+		         color = "0" + color;
+		     }
+		     return "#" + color;
+		 }
+		 //每隔50ms改变一次页面，简单就是性能50ms，借用定时器
+		 setInterval(gif, 50);
+	</script>
+</body>
+</html>

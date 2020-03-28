@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>纯css蒙版和分层线性渐变背景色</title>
+	<style type="text/css">
+		body {
+		  background: -webkit-gradient(linear, left top, right top, from(red), to(cyan));
+		  background: linear-gradient(90deg, red, cyan);
+		  min-height: 100vh
+		}
+		body:before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				bottom: 0;
+		    right: 0;
+				-webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(transparent), to(black));
+				-webkit-mask-image: linear-gradient(to bottom, transparent, black);
+				        mask-image: -webkit-gradient(linear, left top, left bottom, from(transparent), to(black));
+				        mask-image: linear-gradient(to bottom, transparent, black);
+				background: -webkit-gradient(linear, left top, right top, from(hotpink), to(#639));
+				background: linear-gradient(90deg, hotpink, #639);	
+		  }
+	</style>
+</head>
+<body>
+	
+</body>
+</html>

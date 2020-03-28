@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>手机号抽奖</title>
+	<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+	<style type="text/css">
+		 * {
+			padding:0;
+			margin:0;
+		}
+		html,body {
+			width:100%;
+			height:100%;
+			background:-webkit-radial-gradient(#f50607,#800807);
+			background:-moz-radial-gradient(#f50607,#800807);
+			background:-o-radial-gradient(#f50607,#800807);
+			background:radial-gradient(#f50607,#800807);
+		}
+		.container {
+			width:500px;
+			padding:100px;
+			margin:0 auto;
+			overflow:hidden;
+		}
+		.left {
+			width:250px;
+			float:left;
+		}
+		.left h2 {
+			line-height:50px;
+			text-align:center;
+			color:#fff;
+		}
+		.level,.result-box,button {
+			width:250px;
+			height:40px;
+		}
+		.level {
+			border-radius:4px;
+			font-size:18px;
+		}
+		.result-box {
+			margin:15px 0;
+			border-radius:4px;
+			background-color:#fff;
+			text-align:center;
+			line-height:36px;
+			font-size:18px;
+		}
+		button {
+			border:none;
+			color:#fff;
+			font-size:18px;
+			border-radius:4px;
+			cursor:pointer;
+		}
+		button:focus {
+			outline:none;
+		}
+		.start {
+			background-color:#428bca;
+		}
+		.end {
+			background-color:#d9534f;
+		}
+		.list {
+			width:200px;
+			min-height:250px;
+			background:#fff;
+			float:right;
+			border-radius:4px;
+			padding:10px;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="container">
+	    <div class="left">
+	        <h2>抽奖活动</h2>
+	        <select class="level">
+	            <option value="3">三等奖</option>
+	            <option value="2">二等奖</option>
+	            <option value="1">一等奖</option>
+	        </select>
+	        <div class="result-box">150****0000</div>
+	        <button class="start" onclick="start()">开始抽奖</button>
+	    </div>
+	    <div class="list"></div>
+	</div>
+	<script type="text/javascript">
+		 var data = [12345678912, 15617883151, 15617883152, 15617883153, 15617883154, 15617883155, 15617883156, 15617883157, 15617883158, 15617883159, 15617883150, 17617883150, 17617883151, 17617883152, 17617883153, 17617883154, 17617883155, 17617883156, 17617883157, 17617883158, 17617883159, 17617883150, 18617883150]; //参与人员
+		 //内定中奖人员
+		 var initP = [13870620815, 13901647848, 13901757122];
+		 var p1Num = 3; //一等奖数量
+		 var p2Num = 5; //二等奖数量
+		 var p3Num = 10; //三等奖数量
+		 var p1Winner = new Array(); //一等奖中奖者
+		 var p2Winner = new Array(); //二等奖中奖者
+		 var p3Winner = new Array(); //三等奖中奖者
+		 var btn = true; //按钮状态未开始还是结束
+		 var key = 0; //中奖下标
+		 var time = 0; //定时器
+		
+		 //点击按钮
+		 function start() {
+		     if (btn) {
+		         if ((p1Num <= 0) && (p2Num <= 0) && (p3Num <= 0)) {
+		             $("button").hide();
+		             alert("所有抽奖已结束");
+		         } else if ($('select').val() == 3 && (p3Num <= 0)) {
+		             alert('三等奖已抽取完毕，请选择其他奖项...');
+		         } else if ($('select').val() == 2 && (p2Num <= 0)) {
+		             alert('二等奖已抽取完毕，请选择其他奖项...');
+		         } else if ($('select').val() == 1 && (p1Num <= 0)) {
+		             alert("一等奖已抽取完毕，请选择其他奖项...");
+		         } else {
+		             btn = false;
+		             $('button').removeClass('start').addClass('end').text("结束抽奖");
+		             startTrun();
+		         }
+		     } else {
+		         btn = true;
+		         $('button').removeClass("end").addClass("start").text("开始抽奖");
+		         endTrun();
+		
+		         console.log(p3Num, p2Num, p1Num);
+		     }
+		 }
+		
+		 function runTime() {
+		     //$("button").show();
+		     clearInterval(time);
+		     time = setInterval('trunNum()', 10);
+		 }
+		
+		 function trunNum() {
+		     key = Math.floor(Math.random() * (data.length - 1));
+		     var tel = data[key].toString().substr(0, 3) + '****' + data[key].toString().substr(7);
+		     $(".result-box").text(tel);
+		 }
+		
+		 function startTrun() {
+		     runTime();
+		 }
+		 //停止转动数字
+		 function endTrun() {
+		     clearInterval(time);
+		     if ($("select").val() == 3) {
+		         data.splice(key, 1);
+		         p3Winner.push(data[key]);
+		         $(".list").prepend("<p>第" + p3Num + "名：" + data[key] + "</p>");
+		         p3Num--;
+		         if (p3Num == 0) {
+		             $(".list").prepend("<p>三等奖获得者</p>");
+		         }
+		     } else if ($('select').val() == 2) {
+		         data.splice(key, 1);
+		         p2Winner.push(data[key]);
+		         console.log(p2Winner)
+		         $(".list").prepend("<p>第" + p2Num + "名：" + data[key] + "</p>");
+		         p2Num--;
+		         if (p2Num == 0) {
+		             $(".list").prepend("<p>二等奖获得者</p>");
+		         }
+		     } else {
+		
+		         data.splice(key, 1);
+		         p1Winner.push(data[key]);
+		         /*内定
+		          p1Num--;
+		          var neiding = p1Num+1; 
+		          $(".list").prepend("<p>第"+neiding+"名："+initP[p1Num]+"</p>"); */
+		         $(".list").prepend("<p>第" + p1Num + "名：" + data[key] + "</p>");
+		         p1Num--;
+		         if (p1Num == 0) {
+		             $(".list").prepend("<p>一等奖获得者</p>");
+		         }
+		     }
+		 }
+	</script>
+</body>
+</html>

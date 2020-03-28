@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>f.each()方法遍历数组渲染页面</title>
+<script src="https://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+<style>
+</style>
+</head>
+<body>
+<link rel="stylesheet" href="https://www.jq22.com/jquery/bootstrap-3.3.4.css">
+
+<div id="test">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <td>id</td>
+                <td>title</td>
+                <td>url</td>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+$(function() {
+    var data = [{
+        'id': '001',
+        'title': '百度',
+        'url': 'http://www.baidu.com'
+    }, {
+        'id': '002',
+        'title': '阿里',
+        'url': 'www.alibaba.com'
+    }, {
+        'id': '002',
+        'title': '阿里',
+        'url': 'www.alibaba.com'
+    }, {
+        'id': '002',
+        'title': '阿里',
+        'url': 'www.alibaba.com'
+    }, {
+        'id': '002',
+        'title': '阿里',
+        'url': 'www.alibaba.com'
+    }, {
+        'id': '003',
+        'title': '腾讯',
+        'url': 'www.qq.com'
+    }]
+
+    var str;
+    data.forEach(function(item) {
+        $("<tr></tr>")
+            .html('<td> ' + item.id + ' </td><td>' + item.title + '</td> <td> ' + item.url + ' </td>')
+            .appendTo("tbody")
+
+    })
+
+});
+</script>
+
+</body>
+</html>

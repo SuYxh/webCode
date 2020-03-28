@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>全屏漂浮碰到边缘自动弹回</title>
+	<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+	<style type="text/css">
+		img {
+			position:absolute;
+			top:0;
+			left:0;
+		}
+
+	</style>
+</head>
+<body>
+	<img src="http://oss.huat.xyz/common-img/lion.png?Expires=1583832615&OSSAccessKeyId=TMP.3KihwaKbXoYiGsgdvjThtuYGHsSmE8qBACubkMzmrMESRYGJrSBs1NftGY9asD3v6QCi5w92pNh7FJSKYbAB3odDsCnH1h&Signature=YvQbsyuZrZlsC6kOIAjweUF6Q9s%3D" width="200">
+	<script type="text/javascript">
+		iw = $("img").width();
+		ih = $("img").height();
+		ws = 0;
+		hs = 0;
+		screenw = $(window).width();
+		screenh = $(window).height();
+		cw = screenw - iw;
+		ch = screenh - ih;
+		
+		// screenw=document.documentElement.clientHeight;
+		wss = 1;
+		hss = 1;
+		setInterval(function() {
+		    ws += wss;
+		    hs += hss;
+		    if (hs > ch) {
+		        hs = ch;
+		        hss = -hss;
+		    }
+		    if (hs <= 0) {
+		        hss = -hss;
+		    }
+		    if (ws > cw) {
+		        ws = cw;
+		        wss = -wss;
+		    }
+		    if (ws <= 0) {
+		        wss = -wss;
+		    }
+		
+		    $("img").css("left", ws + "px")
+		    $("img").css("top", hs + "px")
+		
+		}, 4)
+	</script>
+</body>
+</html>

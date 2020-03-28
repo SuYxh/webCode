@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>全屏遮罩层，弹出框</title>
+<script src="https://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+<style>
+* {
+	margin:0;
+	padding:0;
+}
+#cover {
+	background-color:black;
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:100%;
+	height:100%;
+	filter:alpha(opacity=30);
+	opacity:0.3;
+	display:none;
+	z-index:3;
+}
+#showdiv {
+	width:400px;
+	margin:0 auto;
+	height:400px;
+	display:none;
+	position:absolute;
+	top:10%;
+	left:10%;
+	z-index:3;
+	background:#fff;
+	display:block;
+	border:3px solid #465263;
+}
+#showdiv .center-box1 {
+	background:#F8F7F7;
+	width:100%;
+	height:100px;
+	text-align:center;
+}
+#showdiv .center-box2 {
+	text-indent:50px;
+	width:400px;
+	height:276px;
+	background-color:#ffffff;
+	display:block;
+}
+#showdiv .center-box2 p {
+	font-size:24px;
+	color:black;
+	position:absolute;
+	top:17%;
+	left:20%;
+	font-weight:800;
+}
+#showdiv .center-box2 span {
+	font-size:17px;
+	position:absolute;
+	top:31%;
+	left:20%;
+	font-weight:900;
+	text-decoration:none;
+	color:red;
+}
+#showdiv .center-box2 a {
+	color:#115490;
+	font-size:17px;
+	position:absolute;
+	top:53%;
+	left:26%;
+	font-weight:900;
+}
+#showdiv .center-box2 a:hover {
+	color:#115490;
+}
+#showdiv .center-box3 {
+	width:50px;
+	height:33px;
+	text-align:center;
+	color:#adadad;
+	font-size:26px;
+	float:right;
+	cursor:pointer;
+}
+.center {
+	width:100%;
+	height:50px;
+	margin-top:25px;
+	position:relative;
+}
+.center input {
+	position:absolute;
+	top:45px;
+	left:20px;
+}
+.center span {
+	position:absolute;
+	left:34px;
+	top:41px;
+	font-size:12px;
+}
+.center p {
+	display:inline-block;
+	width:62px;
+	height:30px;
+	background-color:#A9A9A9;
+	position:absolute;
+	top:38px;
+	right:41px;
+	line-height:26px;
+	color:white;
+}
+</style>
+</head>
+<body>
+<button onclick="showWindow('js弹窗 js弹出DIV,并使整个页面背景变暗')">弹出</button>
+ 
+<div id="cover"></div>
+<div id="showdiv"> 
+    <div class="center-box3" onclick="closeWindow()">x</div>
+
+    <div class="center-box2">
+        <p>第一次发布</p>
+        <span>希望可以帮到你</span>
+        <a href="###">这是链接</a>
+    </div>
+    <div class="center-box1">
+        <div class="center">
+            <input name="ck" type="checkbox" value="checkbox" onclick="if (this.checked) {console.log(this.checked);enable()} else {disable()}">
+            <span>打勾</span>
+            <p type="button" id="accept" disabled="true">按钮</p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+// 弹窗
+function showWindow(showmsg) {
+    $('#showdiv').show(); //显示弹窗
+    $('.content').append(showmsg); //追加内容
+    $('#cover').css('display', 'block'); //显示遮罩层
+
+}
+
+// 关闭弹窗
+function closeWindow() {
+    $('#showdiv').hide(); //隐藏弹窗
+    $('#cover').css('display', 'none'); //显示遮罩层
+    $('#showdiv .content').html(""); //清空追加的内容
+}
+
+//调用
+showWindow('js弹窗 js弹出DIV,并使整个页面背景变暗');
+//调用
+function disable() {
+    document.getElementById("accept").disabled = true;
+    document.getElementById("accept").style.background = "#A9A9A9"
+
+
+}
+
+function enable() {
+    document.getElementById("accept").disabled = false
+    document.getElementById("accept").style.background = "blue"
+}
+</script>
+
+</body>
+</html>

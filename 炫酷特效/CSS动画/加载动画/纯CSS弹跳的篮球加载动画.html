@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>纯CSS弹跳的篮球加载动画</title>
+	<style type="text/css">
+		html,
+		body {
+		  height: 100%;
+		}
+		
+		body {
+		  -webkit-box-align: center;
+		          align-items: center;
+		  background: #F9C56D;
+		  display: -webkit-box;
+		  display: flex;
+		  -webkit-box-orient: vertical;
+		  -webkit-box-direction: normal;
+		          flex-direction: column;
+		  -webkit-box-pack: center;
+		          justify-content: center;
+		}
+		
+		@-webkit-keyframes rotateBall {
+		  0% {
+		    -webkit-transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg);
+		            transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg);
+		  }
+		  50% {
+		    -webkit-transform: rotateY(360deg) rotateX(360deg) rotateZ(0deg);
+		            transform: rotateY(360deg) rotateX(360deg) rotateZ(0deg);
+		  }
+		  100% {
+		    -webkit-transform: rotateY(720deg) rotateX(720deg) rotateZ(360deg);
+		            transform: rotateY(720deg) rotateX(720deg) rotateZ(360deg);
+		  }
+		}
+		
+		@keyframes rotateBall {
+		  0% {
+		    -webkit-transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg);
+		            transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg);
+		  }
+		  50% {
+		    -webkit-transform: rotateY(360deg) rotateX(360deg) rotateZ(0deg);
+		            transform: rotateY(360deg) rotateX(360deg) rotateZ(0deg);
+		  }
+		  100% {
+		    -webkit-transform: rotateY(720deg) rotateX(720deg) rotateZ(360deg);
+		            transform: rotateY(720deg) rotateX(720deg) rotateZ(360deg);
+		  }
+		}
+		@-webkit-keyframes bounceBall {
+		  0% {
+		    -webkit-transform: translateY(-70px) scale(1, 1);
+		            transform: translateY(-70px) scale(1, 1);
+		  }
+		  15% {
+		    -webkit-transform: translateY(-56px) scale(1, 1);
+		            transform: translateY(-56px) scale(1, 1);
+		  }
+		  45% {
+		    -webkit-transform: translateY(70px) scale(1, 1);
+		            transform: translateY(70px) scale(1, 1);
+		  }
+		  50% {
+		    -webkit-transform: translateY(73.5px) scale(1, 0.92);
+		            transform: translateY(73.5px) scale(1, 0.92);
+		  }
+		  55% {
+		    -webkit-transform: translateY(70px) scale(1, 0.95);
+		            transform: translateY(70px) scale(1, 0.95);
+		  }
+		  85% {
+		    -webkit-transform: translateY(-56px) scale(1, 1);
+		            transform: translateY(-56px) scale(1, 1);
+		  }
+		  100% {
+		    -webkit-transform: translateY(-70px) scale(1, 1);
+		            transform: translateY(-70px) scale(1, 1);
+		  }
+		}
+		@keyframes bounceBall {
+		  0% {
+		    -webkit-transform: translateY(-70px) scale(1, 1);
+		            transform: translateY(-70px) scale(1, 1);
+		  }
+		  15% {
+		    -webkit-transform: translateY(-56px) scale(1, 1);
+		            transform: translateY(-56px) scale(1, 1);
+		  }
+		  45% {
+		    -webkit-transform: translateY(70px) scale(1, 1);
+		            transform: translateY(70px) scale(1, 1);
+		  }
+		  50% {
+		    -webkit-transform: translateY(73.5px) scale(1, 0.92);
+		            transform: translateY(73.5px) scale(1, 0.92);
+		  }
+		  55% {
+		    -webkit-transform: translateY(70px) scale(1, 0.95);
+		            transform: translateY(70px) scale(1, 0.95);
+		  }
+		  85% {
+		    -webkit-transform: translateY(-56px) scale(1, 1);
+		            transform: translateY(-56px) scale(1, 1);
+		  }
+		  100% {
+		    -webkit-transform: translateY(-70px) scale(1, 1);
+		            transform: translateY(-70px) scale(1, 1);
+		  }
+		}
+		.ball {
+		  -webkit-animation-name: bounceBall;
+		          animation-name: bounceBall;
+		  -webkit-animation-duration: 1.2s;
+		          animation-duration: 1.2s;
+		  -webkit-animation-iteration-count: infinite;
+		          animation-iteration-count: infinite;
+		  -webkit-animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+		          animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+		  border-radius: 50%;
+		  height: 60px;
+		  position: relative;
+		  -webkit-transform: translateY(-70px);
+		          transform: translateY(-70px);
+		  -webkit-transform-style: preserve-3d;
+		          transform-style: preserve-3d;
+		  width: 60px;
+		  z-index: 1;
+		}
+		.ball::before {
+		  background: radial-gradient(circle at 36px 20px, #FF8C16, #7c3f00);
+		  border: 2px solid #333333;
+		  border-radius: 50%;
+		  content: '';
+		  height: calc(100% + 6px);
+		  left: -3px;
+		  position: absolute;
+		  top: -3px;
+		  -webkit-transform: translateZ(1vmin);
+		          transform: translateZ(1vmin);
+		  width: calc(100% + 6px);
+		}
+		.ball .inner {
+		  -webkit-animation-name: rotateBall;
+		          animation-name: rotateBall;
+		  -webkit-animation-duration: 25s;
+		          animation-duration: 25s;
+		  -webkit-animation-iteration-count: infinite;
+		          animation-iteration-count: infinite;
+		  -webkit-animation-timing-function: linear;
+		          animation-timing-function: linear;
+		  border-radius: 50%;
+		  height: 100%;
+		  position: absolute;
+		  -webkit-transform-style: preserve-3d;
+		          transform-style: preserve-3d;
+		  width: 100%;
+		}
+		.ball .line::before, .ball .line::after {
+		  border: 2px solid #333333;
+		  border-radius: 50%;
+		  content: '';
+		  height: 99%;
+		  position: absolute;
+		  width: 99%;
+		}
+		.ball .line:before {
+		  -webkit-transform: rotate3d(0, 0, 0, 0);
+		          transform: rotate3d(0, 0, 0, 0);
+		}
+		.ball .line:after {
+		  -webkit-transform: rotate3d(1, 0, 0, 90deg);
+		          transform: rotate3d(1, 0, 0, 90deg);
+		}
+		.ball .line--two:before {
+		  -webkit-transform: rotate3d(0, 0, 0, 2deg);
+		          transform: rotate3d(0, 0, 0, 2deg);
+		}
+		.ball .line--two:after {
+		  -webkit-transform: rotate3d(1, 0, 0, 88eg);
+		          transform: rotate3d(1, 0, 0, 88eg);
+		}
+		.ball .oval::before, .ball .oval::after {
+		  border-top: 4px solid #333333;
+		  border-radius: 50%;
+		  content: '';
+		  height: 99%;
+		  position: absolute;
+		  width: 99%;
+		}
+		.ball .oval:before {
+		  -webkit-transform: rotate3d(1, 0, 0, 45deg) translate3d(0, 0, 6px);
+		          transform: rotate3d(1, 0, 0, 45deg) translate3d(0, 0, 6px);
+		}
+		.ball .oval:after {
+		  -webkit-transform: rotate3d(1, 0, 0, -45deg) translate3d(0, 0, -6px);
+		          transform: rotate3d(1, 0, 0, -45deg) translate3d(0, 0, -6px);
+		}
+		.ball .oval--two:before {
+		  -webkit-transform: rotate3d(1, 0, 0, 135deg) translate3d(0, 0, -6px);
+		          transform: rotate3d(1, 0, 0, 135deg) translate3d(0, 0, -6px);
+		}
+		.ball .oval--two:after {
+		  -webkit-transform: rotate3d(1, 0, 0, -135deg) translate3d(0, 0, 6px);
+		          transform: rotate3d(1, 0, 0, -135deg) translate3d(0, 0, 6px);
+		}
+		
+		@-webkit-keyframes bounceShadow {
+		  0% {
+		    -webkit-filter: blur(3px);
+		            filter: blur(3px);
+		    opacity: .6;
+		    -webkit-transform: translateY(73px) scale(0.5, 0.5);
+		            transform: translateY(73px) scale(0.5, 0.5);
+		  }
+		  45% {
+		    -webkit-filter: blur(1px);
+		            filter: blur(1px);
+		    opacity: .9;
+		    -webkit-transform: translateY(73px) scale(1, 1);
+		            transform: translateY(73px) scale(1, 1);
+		  }
+		  55% {
+		    -webkit-filter: blur(1px);
+		            filter: blur(1px);
+		    opacity: .9;
+		    -webkit-transform: translateY(73px) scale(1, 1);
+		            transform: translateY(73px) scale(1, 1);
+		  }
+		  100% {
+		    -webkit-filter: blur(3px);
+		            filter: blur(3px);
+		    opacity: .6;
+		    -webkit-transform: translateY(73px) scale(0.5, 0.5);
+		            transform: translateY(73px) scale(0.5, 0.5);
+		  }
+		}
+		
+		@keyframes bounceShadow {
+		  0% {
+		    -webkit-filter: blur(3px);
+		            filter: blur(3px);
+		    opacity: .6;
+		    -webkit-transform: translateY(73px) scale(0.5, 0.5);
+		            transform: translateY(73px) scale(0.5, 0.5);
+		  }
+		  45% {
+		    -webkit-filter: blur(1px);
+		            filter: blur(1px);
+		    opacity: .9;
+		    -webkit-transform: translateY(73px) scale(1, 1);
+		            transform: translateY(73px) scale(1, 1);
+		  }
+		  55% {
+		    -webkit-filter: blur(1px);
+		            filter: blur(1px);
+		    opacity: .9;
+		    -webkit-transform: translateY(73px) scale(1, 1);
+		            transform: translateY(73px) scale(1, 1);
+		  }
+		  100% {
+		    -webkit-filter: blur(3px);
+		            filter: blur(3px);
+		    opacity: .6;
+		    -webkit-transform: translateY(73px) scale(0.5, 0.5);
+		            transform: translateY(73px) scale(0.5, 0.5);
+		  }
+		}
+		.shadow {
+		  -webkit-animation-name: bounceShadow;
+		          animation-name: bounceShadow;
+		  -webkit-animation-duration: 1.2s;
+		          animation-duration: 1.2s;
+		  -webkit-animation-iteration-count: infinite;
+		          animation-iteration-count: infinite;
+		  -webkit-animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+		          animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+		  background: black;
+		  -webkit-filter: blur(2px);
+		          filter: blur(2px);
+		  border-radius: 50%;
+		  height: 6px;
+		  -webkit-transform: translateY(73px);
+		          transform: translateY(73px);
+		  width: 54px;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="ball">
+	  <div class="inner">
+	    <div class="line"></div>
+	    <div class="line line--two"></div>
+	    <div class="oval"></div>
+	    <div class="oval oval--two"></div>
+	  </div>
+	</div>
+	<div class="shadow"></div>
+</body>
+</html>

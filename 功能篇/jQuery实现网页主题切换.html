@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>jQuery实现网页主题切换（超简单）</title>
+<script src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+<style>
+* {
+	margin:0;
+	padding:0;
+}
+body {
+	background:pink;
+}
+#top {
+	width:100%;
+	height:60px;
+	background:white;
+}
+#top>p {
+	line-height:60px;
+	float:left;
+	font-weight:bold;
+	padding:0 0 0 10px;
+}
+#top>.theme {
+	width:240px;
+	float:left;
+	height:60px;
+	margin:0 10px;
+}
+#top>.theme>div {
+	width:40px;
+	height:40px;
+	margin:10px 20px;
+	border-radius:5px;
+	float:left;
+}
+#top>.theme>div:hover {
+	box-shadow:0 0 10px tan;
+	cursor:pointer;
+}
+#top>.theme>div:nth-child(1) {
+	background:pink;
+}
+#top>.theme>div:nth-child(2) {
+	background:teal;
+}
+#top>.theme>div:nth-child(3) {
+	background:tomato;
+}
+#top>.now {
+	width:auto;
+	float:left;
+	height:60px;
+	margin:0 30px;
+}
+#top>.now>p {
+	display:block;
+	float:left;
+	line-height:60px;
+	margin:0 20px;
+	font-weight:bold;
+}
+#top>.now>.background,#top>.now>.color {
+	float:left;
+}
+#top>.now>.background>p,#top>.now>.color>p {
+	line-height:60px;
+	float:left;
+}
+#top>.now>.background>div,#top>.now>.color>div {
+	float:left;
+	width:40px;
+	height:40px;
+	margin:10px;
+	border-radius:5px;
+	border:1px solid #333333;
+}
+#title {
+	width:100%;
+	height:100px;
+	position:absolute;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+	margin:auto;
+	text-align:center;
+	font-size:2em;
+	letter-spacing:10px;
+	font-weight:bold;
+}
+</style>
+</head>
+<body>
+<div id="top">
+    <p>选择主题：</p>
+    <div class="theme">
+        <div id="theme1"></div>
+        <div id="theme2"></div>
+        <div id="theme3"></div>
+    </div>
+
+    <div class="now">
+        <p>所选主题状态：</p>
+        <div class="background">
+            <p>背景色</p>
+            <div class="now_bachground"></div>
+        </div>
+        <div class="color">
+            <p>前景色</p>
+            <div class="now_color"></div>
+        </div>
+    </div>
+</div>
+
+<div id="title">欢迎你的到来</div>
+
+<script>
+$(function() {
+    $("body").css("background", "pink");
+    $("#title").css("color", "black");
+    $(".now_bachground").css("background", "pink");
+    $(".now_color").css("background", "black");
+    $("#theme1").click(function() {
+        $("body").css("background", "pink");
+        $("#title").css("color", "black");
+        $(".now_bachground").css("background", "pink");
+        $(".now_color").css("background", "black")
+    });
+    $("#theme2").click(function() {
+        $("body").css("background", "teal");
+        $("#title").css("color", "turquoise");
+        $(".now_bachground").css("background", "teal");
+        $(".now_color").css("background", "turquoise")
+    });
+    $("#theme3").click(function() {
+        $("body").css("background", "tomato");
+        $("#title").css("color", "white");
+        $(".now_bachground").css("background", "tomato");
+        $(".now_color").css("background", "white")
+    })
+});
+</script>
+
+</body>
+</html>

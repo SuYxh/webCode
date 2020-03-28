@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>日出日落动画</title>
+	<style type="text/css">
+		#info {
+		  position: absolute;
+		  color: #fff;
+		  padding: 50px;
+		  font-family: 'Times new roman';
+		  width: 100px;
+		  font-size: 40px;
+		  line-height: 30px;
+		  z-index: 5;
+		  text-shadow: 0 0 20px #fff;
+		}
+		
+		#sky {
+		  margin-top: 0;
+		  height: 200vh;
+		  width: 100%;
+		  background-image: -webkit-gradient(linear, left top, left bottom, from(#7996fc), color-stop(#cc86e4), color-stop(#fb7cba), color-stop(#ff828b), color-stop(#ff9764), color-stop(#ff9d52), color-stop(#ffa43d), color-stop(#ffad21), color-stop(#ff9a1e), color-stop(#ff8620), color-stop(#ff7026), to(#ff592e));
+		  background-image: linear-gradient(to bottom, #7996fc, #cc86e4, #fb7cba, #ff828b, #ff9764, #ff9d52, #ffa43d, #ffad21, #ff9a1e, #ff8620, #ff7026, #ff592e);
+		  -webkit-transition-duration: 3s;
+		          transition-duration: 3s;
+		}
+		
+		#sun {
+		  width: 250px;
+		  height: 250px;
+		  margin: auto;
+		  margin-top: 60px;
+		  border-radius: 50%;
+		  background: #FFCD47;
+		  box-shadow: none;
+		  -webkit-transition-duration: 3s;
+		          transition-duration: 3s;
+		  cursor: pointer;
+		}
+		
+		#moun1, #moun2, #moun3, #moun4, #moun5, #moun6, #moun7, #moun8, #moun9 {
+		  position: fixed;
+		  margin: 0;
+		  bottom: 0;
+		  width: 0;
+		  height: 0;
+		  -webkit-transition-duration: 3s;
+		          transition-duration: 3s;
+		}
+		
+		.first-row {
+		  border-bottom: 40vh solid #BE87FA;
+		}
+		
+		.second-row {
+		  border-bottom: 30vh solid #9781F0;
+		}
+		
+		.third-row {
+		  border-bottom: 20vh solid #6A72D9;
+		}
+		
+		#moun1 {
+		  margin-left: -5vw;
+		  border-right: 400px solid transparent;
+		  border-left: 150px solid transparent;
+		}
+		
+		#moun2 {
+		  margin-left: 15vw;
+		  border-right: 400px solid transparent;
+		  border-left: 400px solid transparent;
+		}
+		
+		#moun3 {
+		  margin-left: 70vw;
+		  border-right: 150px solid transparent;
+		  border-left: 400px solid transparent;
+		}
+		
+		#moun4 {
+		  margin-left: -15vw;
+		  border-right: 400px solid transparent;
+		  border-left: 500px solid transparent;
+		}
+		
+		#moun5 {
+		  margin-left: 40vw;
+		  border-right: 350px solid transparent;
+		  border-left: 150px solid transparent;
+		}
+		
+		#moun6 {
+		  margin-left: 70vw;
+		  border-right: 200px solid transparent;
+		  border-left: 200px solid transparent;
+		}
+		
+		#moun7 {
+		  margin-left: 15vw;
+		  border-right: 150px solid transparent;
+		  border-left: 250px solid transparent;
+		}
+		
+		#moun8 {
+		  margin-left: 50vw;
+		  border-right: 300px solid transparent;
+		  border-left: 150px solid transparent;
+		}
+		
+		#moun9 {
+		  margin-left: 60vw;
+		  border-right: 300px solid transparent;
+		  border-left: 250px solid transparent;
+		}
+		
+		body {
+		  display: grid;
+		  overflow: hidden;
+		  height: 100vh;
+		  margin: 0;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="info">
+	  Click the sun
+	</div>
+	<div id="sky">
+	  <div id="sun">
+	  </div>
+	</div>
+	<div class="first-row" id="moun1">
+	</div>
+	<div class="first-row" id="moun2">
+	</div>
+	<div class="first-row" id="moun3">
+	</div>
+	<div class="second-row" id="moun4">
+	</div>
+	<div class="second-row" id="moun5">
+	</div>
+	<div class="second-row" id="moun6">
+	</div>
+	<div class="third-row" id="moun7">
+	</div>
+	<div class="third-row" id="moun8">
+	</div>
+	<div class="third-row" id="moun9">
+	</div>
+	<script type="text/javascript">
+		let clicked = false;
+		document.getElementById("sun").addEventListener("click", sunClicked);
+		function sunClicked(){
+		  var first = document.getElementsByClassName("first-row");
+		  var second = document.getElementsByClassName("second-row");
+		  var third = document.getElementsByClassName("third-row");
+		  if(clicked===false){
+		    document.getElementById("sun").style.backgroundColor="#FFAA54";
+		    document.getElementById("sun").style.marginTop="130vh";
+		    document.getElementById("sun").style.width="300px";
+		    document.getElementById("sun").style.height="300px";
+		    document.getElementById("sun").style.boxShadow="0 0 100px #fff";
+		    document.getElementById("sky").style.marginTop="-100vh";
+		    Array.prototype.forEach.call(first, function(el) {
+		      el.style.borderBottom="40vh solid #FF9A1F";
+		    });
+		    Array.prototype.forEach.call(second, function(el) {
+		      el.style.borderBottom="30vh solid #E86710";
+		    });
+		    Array.prototype.forEach.call(third, function(el) {
+		      el.style.borderBottom="20vh solid #692E07";
+		    });
+		    clicked=true;
+		  }else{
+		    document.getElementById("sun").style.backgroundColor="#FFCD47";
+		    document.getElementById("sun").style.marginTop="60px";
+		    document.getElementById("sun").style.width="250px";
+		    document.getElementById("sun").style.height="250px";
+		    document.getElementById("sun").style.boxShadow="none";
+		    document.getElementById("sky").style.marginTop="0";
+		    Array.prototype.forEach.call(first, function(el) {
+		      el.style.borderBottom="40vh solid #BE87FA";
+		    });
+		    Array.prototype.forEach.call(second, function(el) {
+		      el.style.borderBottom="30vh solid #9781F0";
+		    });
+		    Array.prototype.forEach.call(third, function(el) {
+		      el.style.borderBottom="20vh solid #6A72D9";
+		    });
+		    clicked=false;
+		  }
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>原生JS实现回到顶部功能</title>
+<script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<style>
+* {
+	border:0;
+	margin:0;
+	padding:0;
+	outline:0;
+}
+html,body {
+	width:100%;
+	height:100%;
+}
+/*主内容区*/
+.box {
+	width:1190px;
+	height:3000px;
+	margin:0 auto;
+	background-color:#2BB3FF;
+}
+/*置顶按钮*/
+#btn {
+	width:40px;
+	height:40px;
+	position:fixed;
+	right:16%;
+	bottom:10px;
+	/*no-repeat为不平铺，*/
+	background:url(../img/index-huidaodingbu.jpg) no-repeat left top;
+	border:1px solid #CCCCCC;
+	display:none;
+}
+#btn:hover {
+	background:url(../img/index-huidaodingbu.jpg) no-repeat left -40px;
+}
+</style>
+</head>
+<body>
+<div class="box">
+
+</div>
+
+<a href="javascript:;" id="btn" title="回到顶部">↑</a>
+
+<script>
+window.onload = function() {
+    var obtn = document.getElementById('btn');
+    var clientHeight = document.documentElement.clientHeight;
+    var timer = null;
+    var isTop = true;
+
+    window.onscroll = function() {
+        var osTop = document.documentElement.scrollTop || document.body.scrollTop;
+        if (osTop >= clientHeight) {
+            obtn.style.display = 'block';
+        } else {
+            obtn.style.display = 'none';
+        }
+
+        if (!isTop) {
+            clearInterval(timer);
+        }
+        isTop = false;
+    }
+
+    //给其添加点击事件
+    obtn.onclick = function() {
+        //写定时器,动画效果的函数setInterval(),放一个匿名函数function()
+        timer = setInterval(function() {
+            var osTop = document.documentElement.scrollTop || document.body.scrollTop;
+            var ispeed = Math.floor(-osTop / 5);
+
+            document.documentElement.scrollTop = document.body.scrollTop = osTop + ispeed;
+
+            isTop = true;
+            console.log(osTop - ispeed);
+            if (osTop == 0) {
+                clearInterval(timer);
+            }
+        }, 30);
+
+    }
+}
+</script>
+
+</body>
+</html>
